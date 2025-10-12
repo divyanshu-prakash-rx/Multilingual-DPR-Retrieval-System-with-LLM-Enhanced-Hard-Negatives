@@ -1,0 +1,10 @@
+trained_models/*
+data/
+runs/
+*.log
+cache_dir/
+llm_cache/
+__pycache__/
+.env
+*.env
+train_scripts_modified/llm_categorization/.env

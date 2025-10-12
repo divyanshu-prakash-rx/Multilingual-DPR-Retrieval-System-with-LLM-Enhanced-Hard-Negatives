@@ -2,7 +2,7 @@
 
 python data_processing/download/download_msmarco.py
 python data_processing/download/download_and_prepare_tydi_train_in_st_format.py
-ptyhon data_processing/download/download_and_prepare_tydi_test_in_beir_format.py
+python data_processing/download/download_and_prepare_tydi_test_in_beir_format.py
 python data_processing/download/download_and_prepare_mmarco.py
 python data_processing/download/download_and_prepare_miracl.py
 python data_processing/download/download_and_prepare_bsard.py
