@@ -58,9 +58,9 @@ def download_and_prepare_tydi_test():
         qrels_df = pd.DataFrame(qrels_dict)
         qrels_df
 
-        os.makedirs(f"../../data/tydi/{language}/qrels", exist_ok=True)
+        os.makedirs(f"data/tydi/{language}/qrels", exist_ok=True)
         qrels_df.to_csv(
-            f"../../data/tydi/{language}/qrels/{split}.tsv", sep="\t", index=False
+            f"data/tydi/{language}/qrels/{split}.tsv", sep="\t", index=False
         )
 
         queries_dict = {
@@ -76,14 +76,14 @@ def download_and_prepare_tydi_test():
         query_df
 
         query_df.to_json(
-            f"../../data/tydi/{language}/queries.jsonl", orient="records", lines=True
+            f"data/tydi/{language}/queries.jsonl", orient="records", lines=True
         )
 
         corpus_dataset = corpus_dataset["train"]
         corpus_dataset = corpus_dataset.rename_column("docid", "_id")
 
         corpus_dataset.to_json(
-            f"../../data/tydi/{language}/corpus.jsonl", orient="records", lines=True
+            f"data/tydi/{language}/corpus.jsonl", orient="records", lines=True
         )
 
     print("=== Mr. TyDi Test download complete ===")

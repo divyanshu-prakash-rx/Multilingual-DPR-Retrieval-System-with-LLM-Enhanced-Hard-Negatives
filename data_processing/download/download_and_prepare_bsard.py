@@ -15,7 +15,7 @@ def download_and_prepare_bsard():
     dataset = datasets.load_dataset("maastrichtlawtech/bsard", "corpus")
 
     # Create the output directory if it doesn't exist
-    os.makedirs("../../data/bsard", exist_ok=True)
+    os.makedirs("data/bsard", exist_ok=True)
 
     # Prepare the corpus dataframe
     corpus_df = pd.DataFrame(dataset["corpus"])
@@ -23,7 +23,7 @@ def download_and_prepare_bsard():
     corpus_df.columns = ["_id", "text"]
 
     # Save the corpus dataframe as a JSONL file
-    corpus_df.to_json("../../data/bsard/corpus.jsonl", orient="records", lines=True)
+    corpus_df.to_json("data/bsard/corpus.jsonl", orient="records", lines=True)
 
     # Load the BSARD questions dataset
     dataset = datasets.load_dataset("maastrichtlawtech/bsard", "questions")
@@ -35,7 +35,7 @@ def download_and_prepare_bsard():
     queries_df.columns = ["_id", "text"]
 
     # Save the queries dataframe as a JSONL file
-    queries_df.to_json("../../data/bsard/queries.jsonl", orient="records", lines=True)
+    queries_df.to_json("data/bsard/queries.jsonl", orient="records", lines=True)
 
     # Prepare the qrels dataframe
     qrel_dict = {"query-id": [], "corpus-id": [], "score": []}
@@ -50,10 +50,10 @@ def download_and_prepare_bsard():
     qrel_df = pd.DataFrame(qrel_dict)
 
     # Create the qrels directory if it doesn't exist
-    os.makedirs("../../data/bsard/qrels", exist_ok=True)
+    os.makedirs("data/bsard/qrels", exist_ok=True)
 
     # Save the qrels dataframe as a TSV file
-    qrel_df.to_csv("../../data/bsard/qrels/test.tsv", index=False, sep="\t")
+    qrel_df.to_csv("data/bsard/qrels/test.tsv", index=False, sep="\t")
 
     print("=== BSARD download complete ===")
 

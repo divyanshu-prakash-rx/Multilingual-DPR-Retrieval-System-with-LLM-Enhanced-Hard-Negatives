@@ -6,7 +6,7 @@ import pandas as pd
 from huggingface_hub import hf_hub_download
 
 
-download_dir = "../../data/miracl"
+download_dir = "data/miracl"
 os.makedirs(download_dir, exist_ok=True)
 
 languages = [

@@ -66,13 +66,13 @@ def download_and_prepare_geradalir():
     test_qrels_df.dropna(inplace=True)
 
     # Create directories if they don't exist
-    os.makedirs("../../data/gerdalir", exist_ok=True)
-    os.makedirs("../../data/gerdalir/qrels", exist_ok=True)
+    os.makedirs("data/gerdalir", exist_ok=True)
+    os.makedirs("data/gerdalir/qrels", exist_ok=True)
 
     # Save processed data to files
-    corpus_df.to_json("../../data/gerdalir/corpus.jsonl", orient="records", lines=True)
-    query_df.to_json("../../data/gerdalir/queries.jsonl", orient="records", lines=True)
-    test_qrels_df.to_csv("../../data/gerdalir/qrels/test.tsv", sep="\t", index=False)
+    corpus_df.to_json("data/gerdalir/corpus.jsonl", orient="records", lines=True)
+    query_df.to_json("data/gerdalir/queries.jsonl", orient="records", lines=True)
+    test_qrels_df.to_csv("data/gerdalir/qrels/test.tsv", sep="\t", index=False)
 
     print("=== Geradalir download complete ===")
 

@@ -40,7 +40,7 @@ def download_and_prepare_tydi_train():
 
         query_dataset
 
-        os.makedirs(f"../../data/tydi/{language}/", exist_ok=True)
+        os.makedirs(f"data/tydi/{language}/", exist_ok=True)
 
         queries_dict = {
             "query_text": [],
@@ -66,25 +66,25 @@ def download_and_prepare_tydi_train():
 
         query_df = pd.DataFrame(queries_dict)
         query_df.to_csv(
-            f"../../data/tydi/{language}/{split}.tsv", sep="\t", index=False
+            f"data/tydi/{language}/{split}.tsv", sep="\t", index=False
         )
 
         print("---------------------------------------")
 
     print("Combining all languages...")
 
-    languages = os.listdir("../../data/tydi")
+    languages = os.listdir("data/tydi")
     languages = [
         language
         for language in languages
-        if os.path.isdir(f"../../data/tydi/{language}")
+        if os.path.isdir(f"data/tydi/{language}")
     ]
 
     train_type = "train"
 
     tydi_dfs = []
     for language in languages:
-        tydi_df = pd.read_csv(f"../../data/tydi/{language}/{train_type}.tsv", sep="\t")
+        tydi_df = pd.read_csv(f"data/tydi/{language}/{train_type}.tsv", sep="\t")
         tydi_df["gold_passage"] = tydi_df["title"] + " " + tydi_df["gold_passage"]
         tydi_df = tydi_df[["query_text", "gold_passage", "hard_negative"]]
         print(f"Language: {language}")
@@ -93,9 +93,9 @@ def download_and_prepare_tydi_train():
 
     combined_df = pd.concat(tydi_dfs)
 
-    combined_df.to_csv(f"../../data/tydi/{train_type}_tydi.tsv", sep="\t", index=False)
+    combined_df.to_csv(f"data/tydi/{train_type}_tydi.tsv", sep="\t", index=False)
 
-    print("Combined TyDi dataset saved to ../../data/tydi/tydi-train.tsv")
+    print("Combined TyDi dataset saved to data/tydi/tydi-train.tsv")
 
     print("=== Mr. TyDi download complete ===")
 
