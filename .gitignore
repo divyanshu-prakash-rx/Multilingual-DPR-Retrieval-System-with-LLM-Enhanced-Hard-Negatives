@@ -1,4 +1,4 @@
-trained_models/*
+models/
 data/
 runs/
 *.log
