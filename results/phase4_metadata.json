@@ -1,0 +1,16 @@
+{
+  "stage": "phase_4_rag_integration",
+  "timestamp": "2025-11-06T00:38:54.517482",
+  "model_path": "./models/dpr_rag_phase4",
+  "training_samples": 533,
+  "rag_samples_scored": 1000,
+  "rag_samples_selected": 533,
+  "quality_threshold": 0.65,
+  "quality_percentile": 0.5,
+  "epochs": 3,
+  "batch_size": 8,
+  "learning_rate": 5e-07,
+  "rag_context_retrieval": "FAISS IndexFlatIP",
+  "rag_scorer": "LLMClassifier with context",
+  "training_time_minutes": 24.646342678864798
+}

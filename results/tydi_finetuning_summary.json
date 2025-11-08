@@ -1,0 +1,14 @@
+{
+  "timestamp": "2025-11-06T03:18:29.287277",
+  "tydi_samples": 1688,
+  "models_finetuned": {
+    "BM25 Baseline": "./models/dpr_bm25_baseline_tydi_final",
+    "LLM Enhanced": "./models/dpr_llm_enhanced_tydi_final",
+    "RAG Enhanced": "./models/dpr_rag_enhanced_tydi_final"
+  },
+  "fine_tuning_config": {
+    "epochs": 3,
+    "batch_size": 4,
+    "learning_rate": 1e-05
+  }
+}

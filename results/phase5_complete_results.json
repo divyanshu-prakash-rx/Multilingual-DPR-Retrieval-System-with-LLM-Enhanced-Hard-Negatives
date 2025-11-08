@@ -1,0 +1,247 @@
+{
+  "phase5_summary": {
+    "models_evaluated": 3,
+    "total_languages": 15,
+    "total_samples": 1540,
+    "settings": [
+      "In-Distribution",
+      "Out-of-Distribution",
+      "Zero-Shot"
+    ]
+  },
+  "in_distribution": {
+    "BM25 Baseline": {
+      "by_language": {
+        "swahili": {
+          "MRR@10": 0.4197,
+          "Recall@10": 0.77,
+          "nDCG@10": 0.504
+        },
+        "bengali": {
+          "MRR@10": 0.6196,
+          "Recall@10": 0.94,
+          "nDCG@10": 0.6977
+        },
+        "telugu": {
+          "MRR@10": 0.2897,
+          "Recall@10": 0.52,
+          "nDCG@10": 0.3443
+        }
+      },
+      "avg_MRR@10": 0.44300000000000006,
+      "avg_Recall@10": 0.7433333333333333,
+      "avg_nDCG@10": 0.5153333333333333
+    },
+    "LLM Enhanced": {
+      "by_language": {
+        "swahili": {
+          "MRR@10": 0.3781,
+          "Recall@10": 0.79,
+          "nDCG@10": 0.4757
+        },
+        "bengali": {
+          "MRR@10": 0.6275,
+          "Recall@10": 0.93,
+          "nDCG@10": 0.7024
+        },
+        "telugu": {
+          "MRR@10": 0.2777,
+          "Recall@10": 0.52,
+          "nDCG@10": 0.3353
+        }
+      },
+      "avg_MRR@10": 0.42776666666666663,
+      "avg_Recall@10": 0.7466666666666667,
+      "avg_nDCG@10": 0.5044666666666667
+    },
+    "RAG Enhanced": {
+      "by_language": {
+        "swahili": {
+          "MRR@10": 0.4311,
+          "Recall@10": 0.77,
+          "nDCG@10": 0.5121
+        },
+        "bengali": {
+          "MRR@10": 0.6049,
+          "Recall@10": 0.93,
+          "nDCG@10": 0.6866
+        },
+        "telugu": {
+          "MRR@10": 0.2997,
+          "Recall@10": 0.58,
+          "nDCG@10": 0.3658
+        }
+      },
+      "avg_MRR@10": 0.44523333333333337,
+      "avg_Recall@10": 0.7600000000000001,
+      "avg_nDCG@10": 0.5215000000000001
+    }
+  },
+  "out_of_distribution": {
+    "BM25 Baseline": {
+      "by_language": {
+        "arabic": {
+          "MRR@10": 0.3235,
+          "Recall@10": 0.581,
+          "nDCG@10": 0.3847
+        },
+        "japanese": {
+          "MRR@10": 0.3572,
+          "Recall@10": 0.6952,
+          "nDCG@10": 0.4369
+        },
+        "indonesian": {
+          "MRR@10": 0.3474,
+          "Recall@10": 0.619,
+          "nDCG@10": 0.4122
+        },
+        "russian": {
+          "MRR@10": 0.4364,
+          "Recall@10": 0.781,
+          "nDCG@10": 0.5167
+        }
+      },
+      "avg_MRR@10": 0.36612500000000003,
+      "avg_Recall@10": 0.66905,
+      "avg_nDCG@10": 0.43762500000000004
+    },
+    "LLM Enhanced": {
+      "by_language": {
+        "arabic": {
+          "MRR@10": 0.3942,
+          "Recall@10": 0.6952,
+          "nDCG@10": 0.4656
+        },
+        "japanese": {
+          "MRR@10": 0.5119,
+          "Recall@10": 0.8,
+          "nDCG@10": 0.5805
+        },
+        "indonesian": {
+          "MRR@10": 0.376,
+          "Recall@10": 0.7524,
+          "nDCG@10": 0.4656
+        },
+        "russian": {
+          "MRR@10": 0.477,
+          "Recall@10": 0.8,
+          "nDCG@10": 0.5537
+        }
+      },
+      "avg_MRR@10": 0.439775,
+      "avg_Recall@10": 0.7619,
+      "avg_nDCG@10": 0.51635
+    },
+    "RAG Enhanced": {
+      "by_language": {
+        "arabic": {
+          "MRR@10": 0.3824,
+          "Recall@10": 0.6762,
+          "nDCG@10": 0.4536
+        },
+        "japanese": {
+          "MRR@10": 0.4343,
+          "Recall@10": 0.7333,
+          "nDCG@10": 0.5058
+        },
+        "indonesian": {
+          "MRR@10": 0.4307,
+          "Recall@10": 0.7619,
+          "nDCG@10": 0.5093
+        },
+        "russian": {
+          "MRR@10": 0.4743,
+          "Recall@10": 0.8,
+          "nDCG@10": 0.5519
+        }
+      },
+      "avg_MRR@10": 0.430425,
+      "avg_Recall@10": 0.74285,
+      "avg_nDCG@10": 0.50515
+    }
+  },
+  "zero_shot": {
+    "BM25 Baseline": {
+      "by_language": {
+        "chinese": {
+          "MRR@10": 0.4081,
+          "Recall@10": 0.7619,
+          "nDCG@10": 0.4927
+        },
+        "french": {
+          "MRR@10": 0.2641,
+          "Recall@10": 0.6,
+          "nDCG@10": 0.3446
+        },
+        "dutch": {
+          "MRR@10": 0.3182,
+          "Recall@10": 0.5524,
+          "nDCG@10": 0.373
+        },
+        "german": {
+          "MRR@10": 0.3357,
+          "Recall@10": 0.6667,
+          "nDCG@10": 0.4131
+        }
+      },
+      "avg_MRR@10": 0.33152499999999996,
+      "avg_Recall@10": 0.64525,
+      "avg_nDCG@10": 0.40585000000000004
+    },
+    "LLM Enhanced": {
+      "by_language": {
+        "chinese": {
+          "MRR@10": 0.5169,
+          "Recall@10": 0.8381,
+          "nDCG@10": 0.5941
+        },
+        "french": {
+          "MRR@10": 0.416,
+          "Recall@10": 0.6952,
+          "nDCG@10": 0.4838
+        },
+        "dutch": {
+          "MRR@10": 0.3877,
+          "Recall@10": 0.6762,
+          "nDCG@10": 0.4546
+        },
+        "german": {
+          "MRR@10": 0.405,
+          "Recall@10": 0.7429,
+          "nDCG@10": 0.4853
+        }
+      },
+      "avg_MRR@10": 0.4314,
+      "avg_Recall@10": 0.7381000000000001,
+      "avg_nDCG@10": 0.5044500000000001
+    },
+    "RAG Enhanced": {
+      "by_language": {
+        "chinese": {
+          "MRR@10": 0.4816,
+          "Recall@10": 0.8381,
+          "nDCG@10": 0.5674
+        },
+        "french": {
+          "MRR@10": 0.3477,
+          "Recall@10": 0.6762,
+          "nDCG@10": 0.4258
+        },
+        "dutch": {
+          "MRR@10": 0.3434,
+          "Recall@10": 0.619,
+          "nDCG@10": 0.4094
+        },
+        "german": {
+          "MRR@10": 0.3301,
+          "Recall@10": 0.7048,
+          "nDCG@10": 0.418
+        }
+      },
+      "avg_MRR@10": 0.3757,
+      "avg_Recall@10": 0.7095250000000001,
+      "avg_nDCG@10": 0.45515
+    }
+  },
+  "timestamp": "2025-11-08T16:15:23.401284"
+}

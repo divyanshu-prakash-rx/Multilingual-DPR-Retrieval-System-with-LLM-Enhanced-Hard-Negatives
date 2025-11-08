@@ -1,0 +1,12 @@
+{
+  "timestamp": "2025-11-04T11:21:15.124774",
+  "stage": "1_msmarco_baseline",
+  "model_path": "./models/dpr_bm25_baseline_epoch5",
+  "base_model": "bert-base-multilingual-cased",
+  "negative_sampling": "BM25",
+  "training_samples": 1000,
+  "epochs": 5,
+  "batch_size_effective": 8,
+  "max_seq_length": 256,
+  "fp16": true
+}
