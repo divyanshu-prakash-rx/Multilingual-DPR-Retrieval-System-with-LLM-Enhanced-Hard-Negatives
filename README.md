@@ -1,17 +1,26 @@
-# 🌍 Multilingual Dense Passage Retrieval with LLM-Enhanced Hard Negatives
+# Multilingual Dense Passage Retrieval with LLM-Enhanced Hard Negatives
 
 [![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg)](https://pytorch.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![CUDA](https://img.shields.io/badge/CUDA-11.8-76B900.svg)](https://developer.nvidia.com/cuda-toolkit)
 
-A **novel extension** of Dense Passage Retrieval (DPR) that introduces **LLM-powered progressive hard negative mining** beyond traditional BM25 methods. Achieves **383% improvement** over baseline BM25 retrieval on MS MARCO through semantic-aware negative selection.
+## Introduction
+
+This project extends Dense Passage Retrieval (DPR) by introducing a progressive, LLM-enhanced hard negative mining pipeline that achieves up to 383% improvement over the BM25 baseline on MS MARCO. Our approach integrates LLM-powered negative classification, generation, and retrieval-augmented ranking for superior semantic-aware negative selection in multilingual settings.
 
 **Extends Research**: ["A Study of Dense Passage Retrieval with Hard Negatives"](https://staff.fnwi.uva.nl/m.derijke/wp-content/papercite-data/pdf/rajapakse-2024-study.pdf) (Yates & de Rijke, 2024) by adding LLM classification, generative negatives, and RAG-based ranking.
 
-## 🎯 Overview
+## Key Highlights
 
-This project implements a **5-phase progressive training pipeline** for multilingual dense retrieval, systematically improving retrieval quality through increasingly sophisticated negative mining strategies:
+- **383% performance gain** over BM25 retrieval with RAG enhancements
+- **Progressive mining** via four hard negative mining strategies
+- **Multilingual support**: English (MS MARCO), TyDi QA (9 languages), mMARCO (13 languages)
+- **Local LLM integration** with Ollama for scalable filtering and generation
+- **Production-ready** preprocessing with automated validation and error handling
+- **Comprehensive evaluation** with MRR@10, Recall@K, nDCG@10
+
+## Pipeline Overview
 
 | Phase | Strategy | Key Innovation |
 |-------|----------|----------------|
@@ -21,42 +30,26 @@ This project implements a **5-phase progressive training pipeline** for multilin
 | **Phase 4** | RAG-Enhanced | FAISS-powered context-aware selection |
 | **Phase 5** | Multilingual | Fine-tuning on 15+ languages |
 
-### 🌟 Key Features
+## Novel Contributions Beyond Base Research
 
-✅ **383% Performance Gain**: RAG-enhanced model outperforms BM25 baseline  
-✅ **Progressive Mining**: Systematic improvement through 4 mining strategies  
-✅ **15+ Languages**: English (MS MARCO) + TyDi QA (9 languages) + mMARCO (13 languages)  
-✅ **LLM Integration**: Local Ollama inference for scalable negative classification  
-✅ **Production-Ready**: Automated preprocessing, validation, and error handling  
-✅ **Comprehensive Metrics**: MRR@10, Recall@K, nDCG@10 with detailed analysis  
+While traditional DPR training relies on **BM25-based negative sampling** that suffers from lexical overlap bias and generates semantically weak negatives, our work introduces **three progressive enhancement techniques**:
 
-## 🚀 Novel Contributions Beyond Base Research
-
-While traditional DPR training (Yates & de Rijke, 2024) relies on **BM25-based negative sampling** that suffers from lexical overlap bias and generates semantically weak negatives, our work introduces **three progressive enhancement techniques** leveraging modern LLMs:
-
-### 1. 🎯 LLM-Powered Binary Classification
+### 1. LLM-Powered Binary Classification
 **Problem**: BM25 generates false negatives that mislead training  
 **Solution**: Ollama-based intelligent filtering distinguishes true hard negatives (score 70-100) from false negatives  
 **Impact**: Quality control layer absent in baseline approaches
 
-### 2. 🧠 Query-Conditioned Hard Negative Generation
+### 2. Query-Conditioned Hard Negative Generation
 **Problem**: BM25 relies only on lexical matching  
 **Solution**: LLM generates semantically challenging negatives by understanding query intent and creating topically related but factually incorrect passages  
 **Impact**: Moves beyond simple keyword matching to semantic difficulty
 
-### 3. 🔍 RAG-Enhanced Ranking Mechanism
+### 3. RAG-Enhanced Ranking Mechanism
 **Problem**: Selected negatives may not be contextually appropriate  
 **Solution**: FAISS-powered retrieval scores negatives using contextual information, ensuring semantic space alignment  
-**Impact**: **Novel contribution** - adaptive selection based on retrieval context (not in base paper)
+**Impact**: Novel contribution - adaptive selection based on retrieval context (not in base paper)
 
-### Progressive Pipeline
-```
-BM25 Mining → LLM Classification → LLM Generation → RAG Ranking
-```
-
-**Results**: 49.4% MRR@10 improvement over baseline + 19.0% gain on zero-shot languages, validating that **semantic-aware negative mining through LLM intelligence** produces more robust retrieval models than traditional lexical-based methods.
-
-## 📊 Performance Results
+## Performance Results
 
 ### MS MARCO English Retrieval (300 samples)
 
@@ -89,14 +82,18 @@ BM25 Mining → LLM Classification → LLM Generation → RAG Ranking
 | **LLM Enhanced** ⭐ | **0.4698** | **77.1%** | **0.5472** |
 | RAG Enhanced | 0.4552 | 75.2% | 0.5306 |
 
+<img width="5364" height="1779" alt="phase5_comparison" src="https://github.com/user-attachments/assets/a1715e43-243c-473a-8a38-d60c8a631968" />
+
+
+
 ### Key Findings
 
-🎯 **RAG-Enhanced model achieves 383% improvement** over BM25 baseline on MS MARCO  
-🌍 **LLM-Enhanced excels in out-of-distribution** and zero-shot multilingual scenarios  
-📈 **Progressive mining strategies** demonstrate consistent performance gains  
-🔥 **Best model varies by language**: RAG for in-distribution, LLM for zero-shot
+- **RAG-Enhanced model achieves 383% improvement** over BM25 baseline on MS MARCO
+- **LLM-Enhanced excels in out-of-distribution** and zero-shot multilingual scenarios
+- **Progressive mining strategies** demonstrate consistent performance gains
+- **Best model varies by language**: RAG for in-distribution, LLM for zero-shot
 
-## 📋 Requirements
+## Requirements
 
 ### Hardware Requirements
 
@@ -136,15 +133,13 @@ ollama pull llama3.1:8b
 ollama serve
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Download Data
 
 ```bash
 bash download_data.sh
 ```
-
-Downloads MS MARCO, TyDi QA, and mMARCO datasets.
 
 ### 2. Full Training Pipeline
 
@@ -162,65 +157,26 @@ bash evaluate.sh
 
 Evaluates all trained models on MS MARCO dev set.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Multilingual-DPR-Retrieval-System/
-│
-├── 📊 data/                         # Datasets & processed data
-│   ├── msmarco/                     # MS MARCO English corpus
-│   ├── tydi/                        # TyDi QA (9 languages)
-│   ├── mmarco/                      # mMARCO (13 languages)
-│   ├── training_data/               # BM25-preprocessed data
-│   │   ├── msmarco/train.csv
-│   │   └── tydi/train.csv
-│   └── llm_classified_data/         # LLM-enhanced data
-│       ├── llm_final_training/      # Hard negatives (classified)
-│       ├── rag_selected_negatives/  # High-quality (RAG-scored)
-│       └── llm_generated_negatives/ # LLM-generated triplets
-│
-├── 🤖 models/                       # Trained DPR models
-│   ├── dpr_bm25_baseline_epoch5/    # Phase 1: BM25 baseline
-│   ├── dpr_llm_enhanced/            # Phase 3: LLM-enhanced
-│   ├── dpr_rag_phase4/              # Phase 4: RAG-enhanced
-│   ├── *_tydi_final/                # Multilingual fine-tuned
-│   └── rag_index/                   # FAISS index for RAG
-│
-├── 🔧 data_processing/              # Preprocessing pipeline
-│   ├── prepare_bm25_negatives.py    # BM25 negative mining
-│   ├── llm_classification.py        # LLM classify + generate
-│   └── rag_selection.py             # RAG scoring + selection
-│
-├── 🚀 train_scripts/                # Training pipeline
-│   ├── train_phase1_bm25_baseline.py
-│   ├── train_phase3_llm_enhanced.py
-│   ├── train_phase4_rag_enhanced.py
-│   └── train_phase5_multilingual_finetune.py
-│
-├── 📈 evaluation_scripts/
-│   └── evaluate_models.py           # Comprehensive evaluation
-│
-├── 📋 results/                      # Evaluation results (JSON)
-│   ├── phase2_baseline_results.json
-│   ├── phase3_comparison_results.json
-│   ├── phase4_evaluation_results.json
-│   ├── phase5_complete_results.json
-│   └── tydi_finetuning_summary.json
-│
-├── 📓 Implementation.ipynb          # Complete Jupyter notebook
-├── 🛠️ train.sh                      # Automated training pipeline
-├── 🔍 evaluate.sh                   # Model evaluation script
-└── 📖 README.md                     # This file
+├── data/                # Datasets and processed data
+├── models/              # Trained models by phase
+├── data_processing/     # Preprocessing & negative mining scripts
+├── train_scripts/       # Phase-specific training scripts
+├── evaluation_scripts/  # Model evaluation code
+├── results/             # Metrics & evaluation results
+├── train.sh             # Automation script
+├── evaluate.sh          # Model evaluation script
+└── README.md            # Project documentation
 ```
 
-## 🔧 Usage Guide
+## Usage Guide
 
 ### Full Automated Pipeline
 
-The easiest way to train all models:
-
 ```bash
-# Downloads data, trains all phases, evaluates models
 bash train.sh
 ```
 
@@ -240,11 +196,9 @@ bash download_data.sh
 
 # Step 2: Mine BM25 hard negatives
 python data_processing/prepare_bm25_negatives.py
-# Output: data/training_data/msmarco/train.csv (~1000 samples in DEV_MODE)
 
 # Step 3: Train baseline DPR model
 python train_scripts/train_phase1_bm25_baseline.py
-# Output: models/dpr_bm25_baseline_epoch5/
 ```
 
 #### Phase 3: LLM-Enhanced
@@ -253,28 +207,21 @@ python train_scripts/train_phase1_bm25_baseline.py
 # Prerequisites: Ollama running in separate terminal
 ollama serve
 
-# Step 1: Classify negatives as HARD/EASY + generate new hard negatives
+# Step 1: Classify negatives and generate new hard negatives
 python data_processing/llm_classification.py
-# Output: data/llm_classified_data/llm_final_training/hard_negatives_final.csv
-# Time: ~2-3 hours (uses llama3.1:8b)
 
 # Step 2: Train with LLM-enhanced negatives
 python train_scripts/train_phase3_llm_enhanced.py
-# Output: models/dpr_llm_enhanced/
 ```
 
 #### Phase 4: RAG-Enhanced
 
 ```bash
-# Step 1: Build FAISS index and score negatives with RAG context
+# Step 1: Build FAISS index and score negatives
 python data_processing/rag_selection.py
-# Output: 
-#   - models/rag_index/rag_corpus_index.faiss
-#   - data/llm_classified_data/rag_selected_negatives/selected_high_quality.csv
 
 # Step 2: Train with RAG-selected negatives
 python train_scripts/train_phase4_rag_enhanced.py
-# Output: models/dpr_rag_phase4/
 ```
 
 #### Phase 5: Multilingual Fine-tuning
@@ -282,48 +229,36 @@ python train_scripts/train_phase4_rag_enhanced.py
 ```bash
 # Fine-tune all models on TyDi QA (9 languages)
 python train_scripts/train_phase5_multilingual_finetune.py
-# Output: models/*_tydi_final/ for each trained model
 ```
 
 ### Evaluation
 
 ```bash
-# Evaluate all trained models on MS MARCO dev set
 bash evaluate.sh
-
-# Or directly:
-python evaluation_scripts/evaluate_models.py
-# Output: results/phase*_results.json with MRR@10, Recall@K, nDCG@10
 ```
 
+Generates evaluation metrics in `results/` directory with MRR@10, Recall@K, nDCG@10.
 
+## Technical Details
 
-## 🔬 Technical Details
-
-### Progressive Hard Negative Mining (Our Novel Pipeline)
+### Progressive Hard Negative Mining
 
 #### Phase 1: BM25 Mining (Baseline)
-**Standard Approach** (from base research):
 - Traditional lexical matching (BM25Okapi)
 - Top-100 retrieval with relevance filtering
 - Removes exact positive matches
-- **Limitation**: Lexical overlap bias, semantically weak negatives
 
 #### Phase 3: LLM Classification (Novel - Quality Filtering)
-**Our Contribution**:
-- **Binary classification**: HARD (70-100) vs EASY (0-30) using Ollama llama3.1:8b
-- **Generative augmentation**: Creates 3 query-conditioned hard negatives per sample
-- **Semantic understanding**: Analyzes query intent, not just keyword matching
-- **Checkpoint resilience**: Saves progress every 100 samples
-- **Key Innovation**: Filters false negatives that would mislead training
+- Binary classification: HARD (70-100) vs EASY (0-30) using Ollama llama3.1:8b
+- Generative augmentation: Creates 3 query-conditioned hard negatives per sample
+- Semantic understanding: Analyzes query intent, not just keyword matching
+- Checkpoint resilience: Saves progress every 100 samples
 
 #### Phase 4: RAG Selection (Novel - Context-Aware Ranking)
-**Our Contribution** ⭐ (Not in base paper):
-- **FAISS IndexFlatIP**: Builds semantic index from hard negatives corpus
-- **Context retrieval**: Top-3 similar passages per query for informed scoring
-- **LLM + RAG scoring**: Evaluates negatives with retrieved contextual knowledge
-- **Adaptive selection**: Top 50% based on semantic appropriateness
-- **Key Innovation**: Ensures negatives align with model's semantic space
+- FAISS IndexFlatIP: Builds semantic index from hard negatives corpus
+- Context retrieval: Top-3 similar passages per query for informed scoring
+- LLM + RAG scoring: Evaluates negatives with retrieved contextual knowledge
+- Adaptive selection: Top 50% based on semantic appropriateness
 
 ### Model Architecture
 
@@ -338,7 +273,7 @@ python evaluation_scripts/evaluate_models.py
 - **Recall@K**: Proportion of relevant passages in top-K (K=1,5,10)
 - **nDCG@10**: Normalized Discounted Cumulative Gain at top-10
 
-## 📊 Datasets
+## Datasets
 
 | Dataset | Language(s) | Size | Purpose |
 |---------|------------|------|---------|
@@ -350,9 +285,7 @@ python evaluation_scripts/evaluate_models.py
 - **TyDi QA**: Arabic, Bengali, Finnish, Indonesian, Japanese, Korean, Russian, Swahili, Telugu, Thai
 - **mMARCO**: Arabic, Chinese, Dutch, French, German, Hindi, Indonesian, Italian, Japanese, Portuguese, Russian, Spanish, Vietnamese
 
-## 📝 Citation
-
-If you use this work, please cite:
+## Citation
 
 ```bibtex
 @misc{prakash2025multilingual-dpr-llm,
@@ -368,12 +301,10 @@ If you use this work, please cite:
 
 ### Base Research (Extended By This Work)
 
-This work extends the negative sampling techniques studied in:
-
 ```bibtex
 @article{yates2024study,
   title={A Study of Dense Passage Retrieval with Hard Negatives},
-  author={ Thilina C. Rajapakse, Andrew Yates  , Maarten de Rijke},
+  author={Thilina C. Rajapakse, Andrew Yates, Maarten de Rijke},
   journal={University of Amsterdam},
   year={2024},
   url={https://staff.fnwi.uva.nl/m.derijke/wp-content/papercite-data/pdf/rajapakse-2024-study.pdf},
@@ -382,30 +313,26 @@ This work extends the negative sampling techniques studied in:
 }
 ```
 
-**Our Extensions**: We address limitations of lexical-based methods (BM25) identified in their study by introducing LLM-powered semantic filtering, generative augmentation, and RAG-based context-aware ranking—achieving superior performance in out-of-distribution and zero-shot scenarios.
+## Acknowledgments
 
-## 🙏 Acknowledgments
+This project extends and builds upon:
 
-This project **extends** and builds upon:
-
-- **["A Study of Dense Passage Retrieval with Hard Negatives"](https://staff.fnwi.uva.nl/m.derijke/wp-content/papercite-data/pdf/rajapakse-2024-study.pdf)** - Foundational research comparing negative sampling techniques by Yates & de Rijke (2024). We extend their BM25-based approach with novel LLM-powered semantic enhancements.
+- **["A Study of Dense Passage Retrieval with Hard Negatives"](https://staff.fnwi.uva.nl/m.derijke/wp-content/papercite-data/pdf/rajapakse-2024-study.pdf)** - Foundational research comparing negative sampling techniques by Yates & de Rijke (2024)
 - **[DPR](https://github.com/facebookresearch/DPR)** - Dense Passage Retrieval architecture (Facebook AI)
 - **[SimpleDPR](https://github.com/ThilinaRajapakse/simpletransformers)** - Simple Transformers library
-- **[Ollama](https://ollama.ai/)** - Local LLM inference enabling our novel classification and generation layers
-- **[FAISS](https://github.com/facebookresearch/faiss)** - Efficient similarity search powering our RAG-enhanced ranking (Meta AI)
+- **[Ollama](https://ollama.ai/)** - Local LLM inference for classification and generation
+- **[FAISS](https://github.com/facebookresearch/faiss)** - Efficient similarity search for RAG ranking (Meta AI)
 - **MS MARCO, TyDi QA, mMARCO** - High-quality retrieval benchmarks
 
-**Key Difference**: While the base research focused on comparing existing methods (BM25, clustering, dense indices), our work introduces **three novel LLM-powered techniques** that go beyond lexical matching to achieve semantic-aware negative mining.
-
-## 📜 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
-## 📧 Contact
+## Contact
 
 For questions or collaboration opportunities:
 
