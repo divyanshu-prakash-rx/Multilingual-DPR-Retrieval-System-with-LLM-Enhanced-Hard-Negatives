@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-11-04T00:34:32.248321",
+  "nrows_per_language": 50,
+  "in_distribution": {
+    "dataset": "TyDi",
+    "type": "in-distribution",
+    "total_samples": 100,
+    "languages": [
+      "swahili",
+      "bengali"
+    ],
+    "per_language": {
+      "swahili": 50,
+      "bengali": 50
+    }
+  },
+  "out_of_distribution": {
+    "dataset": "mMARCO",
+    "type": "out-of-distribution",
+    "total_samples": 4,
+    "languages": [
+      "arabic",
+      "japanese"
+    ],
+    "per_language": {
+      "arabic": 2,
+      "japanese": 2
+    }
+  },
+  "zero_shot": {
+    "dataset": "mMARCO",
+    "type": "zero-shot",
+    "total_samples": 2,
+    "languages": [
+      "chinese"
+    ],
+    "per_language": {
+      "chinese": 2
+    }
+  }
+}

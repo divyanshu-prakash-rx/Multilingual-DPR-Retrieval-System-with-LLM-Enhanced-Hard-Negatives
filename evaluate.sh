@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define all datasets
-datasets=("tydi", "mmarco", "miracl", "other", "beir")
+datasets=("tydi", "mmarco")
 
 # Define all models
 models=("ANCE-tydi" "DPR-base-tydi" "DPR-BM-tydi" "ICT-passage-tydi" "ICT-query-tydi" "TAS-passage-tydi" "TAS-query-tydi")
